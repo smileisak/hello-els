@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ImageStream
+metadata:
+  labels:
+    app: demo-els
+  name: demo-els
+
+spec:
+  tags:
+  - from:
+      kind: DockerImage
+      name: smile0x90/hello-els:0.1
+    name: "0.1"
+  - from:
+      kind: DockerImage
+      name: smile0x90/hello-els:0.2
+    name: "0.2"

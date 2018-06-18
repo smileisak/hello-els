@@ -1,0 +1,31 @@
+kind: "DeploymentConfig"
+apiVersion: "v1"
+metadata:
+  name: "demo-els"
+spec:
+  template:
+    metadata:
+      labels:
+        app: "demo-els"
+    spec:
+      containers:
+        - name: "demo-els"
+          image: "demo-els:0.2"
+          ports:
+            - containerPort: 8080
+              protocol: "TCP"
+  replicas: 5
+  selector:
+    app: "demo-els"
+  triggers:
+    - type: "ConfigChange"
+    - type: "ImageChange"
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - "demo-els"
+        from:
+          kind: "ImageStreamTag"
+          name: "demo-els:0.2"
+  strategy:
+    type: "Rolling"
