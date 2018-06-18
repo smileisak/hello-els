@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-els-deployment
+  labels:
+    app: demo-els
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-els
+  template:
+    metadata:
+      labels:
+        app: demo-els
+    spec:
+      containers:
+      - name: demo-els
+        image: smile0x90/hello-els:0.1
+        ports:
+        - containerPort: 8080
